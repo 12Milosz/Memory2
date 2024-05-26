@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="mainMenu.css" />
+  </head>
+  <body>
+    <h1>Memory Game</h1>
+    <div class="inputContainer">
+      <label for="input">Enter Name:</label>
+      <input
+        id="nameInput"
+        class="nameInput"
+        type="text"
+        placeholder="Marek..."
+      />
+    </div>
+    <select id="levelSelect">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button class="playButton">Play</button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const playButton = document.querySelector(".playButton");
+        const nameInput = document.querySelector(".nameInput");
+        const levelSelect = document.querySelector("#levelSelect");
+
+        playButton.addEventListener("click", () => {
+          if (nameInput.value.trim() !== "") {
+            let selectedLevel;
+            if (levelSelect.value === "easy") selectedLevel = 0;
+            else if (levelSelect.value === "medium") selectedLevel = 1;
+            else selectedLevel = 2;
+            localStorage.setItem("selectedLevel", selectedLevel);
+            localStorage.setItem("playerName", nameInput.value.trim());
+            window.location.href = "game";
+          } else {
+            alert("Please enter your name.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

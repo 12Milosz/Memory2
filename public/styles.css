@@ -1,0 +1,99 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #222;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container > h1 {
+  color: white;
+}
+
+.game {
+  width: 440px;
+  height: 390px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  background: darkviolet;
+  color: white;
+  transition: 0.25s;
+}
+
+.item.open {
+  transform: rotate(0deg);
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: indigo;
+  backface-visibility: hidden;
+  transition: 0.5s;
+}
+
+.open::after {
+  transform: rotateY(180deg);
+}
+
+.close::after {
+  content: "";
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.match {
+  background: rgb(48, 0, 82);
+}
+
+.timer {
+  color: white;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  background-color: indigo;
+  outline: none;
+  border: none;
+  color: white;
+  transition: 200ms;
+  border-radius: 3px;
+  padding: 10px 20px;
+}
+
+button:hover {
+  background-color: darkviolet;
+}
+
+button,
+.timer {
+  width: 150px;
+  height: 40px;
+}

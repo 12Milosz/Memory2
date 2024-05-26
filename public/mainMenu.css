@@ -1,0 +1,52 @@
+body {
+  height: 80vh;
+  background-color: #222;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+h1 {
+  margin-bottom: 80px;
+  font-size: 50px;
+}
+.nameInput {
+  width: 250px;
+  height: 25px;
+  transition: 200ms;
+}
+label {
+  display: flex;
+  align-self: start;
+  margin-bottom: 10px;
+}
+.nameInput::placeholder {
+  color: white;
+}
+.playButton {
+  width: 150px;
+  height: 40px;
+}
+.nameInput,
+#levelSelect,
+.playButton {
+  background-color: indigo;
+  outline: none;
+  border: none;
+  color: white;
+  transition: 200ms;
+  border-radius: 3px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.nameInput:hover,
+#levelSelect:hover,
+.playButton:hover {
+  background-color: darkviolet;
+}
