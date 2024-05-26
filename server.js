@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const fs = require("fs").promises; // Używamy fs.promises
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,25 +18,27 @@ app.get("/game", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.post("/result", (req, res) => {
-  const { playerName, time } = req.body;
+app.post("/saveScore", async (req, res) => {
+  const { playerName, elapsedTime } = req.body;
 
-  if (!playerName || !time) {
-    return res
-      .status(400)
-      .json({ error: "Player name and time are required." });
+  try {
+    // Odczytujemy zawartość pliku asynchronicznie
+    let data = await fs.readFile("scores.json", "utf8");
+    let scores = JSON.parse(data);
+
+    // Dodajemy nowy wynik do istniejącej listy
+    scores.push({ playerName, elapsedTime });
+
+    // Zapisujemy zawartość pliku asynchronicznie
+    await fs.writeFile("scores.json", JSON.stringify(scores));
+    console.log("Score appended successfully.");
+    res.status(200).send("Score appended successfully.");
+  } catch (error) {
+    console.error("Error appending score:", error);
+    res.status(500).send("Error appending score.");
   }
-
-  const result = { playerName, time };
-  gameResults.push(result);
-  console.log("Received result:", result);
-  res.json({ message: "Result received successfully." });
-});
-
-app.get("/result", (req, res) => {
-  res.send(gameResults);
 });
 
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

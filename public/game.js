@@ -1,3 +1,10 @@
+const resetButton = document.querySelector(".reset");
+resetButton.addEventListener("click", () => {
+  // Implement reset functionality here
+  // For example, you can reload the page
+  location.reload();
+});
+
 const selectedLevel = localStorage.getItem("selectedLevel");
 const playerName = localStorage.getItem("playerName");
 
@@ -7,7 +14,6 @@ const soundEffect = new Audio("soundEffect.wav");
 let score = 0;
 
 function shuffleData(data) {
-  // return data.sort(() => 0.5 - Math.random());
   return data;
 }
 
@@ -72,22 +78,7 @@ async function fetchData() {
                   elapsedTime,
                   JSON.stringify({ playerName, elapsedTime })
                 );
-                const response = await fetch("/result", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    player_name: playerName,
-                    elapsed_time: elapsedTime,
-                  }),
-                });
-                if (response.ok) {
-                  const data = await response.json();
-                  console.log("Received response from backend:", data);
-                } else {
-                  console.error("Failed to send data to backend.");
-                }
+                saveScore(playerName, Math.floor(elapsedTime / 1000));
               }
             }, 500);
           } else {
@@ -106,8 +97,22 @@ async function fetchData() {
   }
 })();
 
-const reset_button = document
-  .querySelector(".reset")
-  .addEventListener("click", () => {
-    // Implement reset functionality here
-  });
+const saveScore = async (playerName, elapsedTime) => {
+  try {
+    const response = await fetch("/saveScore", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ playerName, elapsedTime }),
+    });
+
+    if (response.ok) {
+      console.log("Score saved successfully.");
+    } else {
+      console.error("Failed to save score.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
