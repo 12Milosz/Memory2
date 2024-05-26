@@ -14,7 +14,7 @@ const soundEffect = new Audio("soundEffect.wav");
 let score = 0;
 
 function shuffleData(data) {
-  return data;
+  return data.sort(() => 0.5 - Math.random());
 }
 
 async function fetchData() {
