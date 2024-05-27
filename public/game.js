@@ -1,8 +1,11 @@
-const resetButton = document.querySelector(".reset");
-resetButton.addEventListener("click", () => {
-  // Implement reset functionality here
-  // For example, you can reload the page
-  location.reload();
+const resetButtons = document.querySelectorAll(".reset");
+const attempts = document.querySelector(".attempts");
+const winPanel = document.querySelector(".winningPanel");
+let attempt = 0;
+resetButtons.forEach((element) => {
+  element.addEventListener("click", () => {
+    location.reload();
+  });
 });
 
 const selectedLevel = localStorage.getItem("selectedLevel");
@@ -57,6 +60,7 @@ async function fetchData() {
           openCards.push(element);
           element.classList.add("open");
           console.log(openCards.length, openCards);
+          attempt++;
         }
         if (openCards.length == 2 && opened == false) {
           opened = true;
@@ -72,6 +76,8 @@ async function fetchData() {
               soundEffect2.play();
               score++;
               if (score >= 10) {
+                attempts.textContent = `Attempts: ${attempt}`;
+                winPanel.classList.toggle("hidden");
                 stopStopwatch();
                 console.log(
                   playerName,

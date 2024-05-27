@@ -2,6 +2,7 @@ let startTime;
 let elapsedTime = 0;
 let timerInterval;
 
+timers = document.querySelectorAll(".timer");
 function startStopwatch() {
   startTime = Date.now() - elapsedTime;
   timerInterval = setInterval(updateStopwatch, 10);
@@ -18,7 +19,9 @@ function displayStopwatch(elapsedTime) {
   const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
 
   const formattedTime = `${pad(minutes)}:${pad(seconds)}`;
-  document.querySelector(".timer").textContent = formattedTime;
+  timers.forEach((element) => {
+    element.innerText = formattedTime;
+  });
 }
 
 function pad(value) {

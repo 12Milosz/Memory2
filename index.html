@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <script src="game.js" defer></script>
     <script src="timer.js" defer></script>
   </head>
@@ -16,6 +16,14 @@
         <button class="reset">Reset Game</button>
         <p class="timer"></p>
       </div>
+    </div>
+    <div class="winningPanel hidden">
+      <h1 class="won">You Won</h1>
+      <div class="score">
+        <p class="attempts">Attempts: 10</p>
+        <p class="timer">Time: 01:10</p>
+      </div>
+      <button class="reset">Play Again</button>
     </div>
   </body>
 </html>
